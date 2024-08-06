@@ -1,0 +1,4 @@
+rootProject.name = 'cake-db'
+include 'backend'
+include 'api'
+
