@@ -9,6 +9,7 @@ import net.cakemc.database.collection.Filters;
 import javax.print.Doc;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -43,7 +44,7 @@ public class CakeCollection implements Collection {
 
     @Override
     public void updateOne(Document document) {
-        this.documents.stream().filter(var -> var.id() == document.id()).findFirst().ifPresent(current -> {
+        this.documents.stream().filter(var -> Objects.equals(var.id(), document.id())).findFirst().ifPresent(current -> {
             for (Entry<String, Object> stringObjectEntry : document.entrySet()) {
                 current.append(stringObjectEntry.getKey(), stringObjectEntry.getValue());
             }
