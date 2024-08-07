@@ -1,4 +1,4 @@
-package net.cakemc.database.api;
+package net.cakemc.database.collection;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -21,6 +21,7 @@ public interface Document {
      *
      * @param key   the key
      * @param value the value
+     *
      * @return the document
      */
     public Document append(String key, Object value);
@@ -31,6 +32,7 @@ public interface Document {
      * @param <T>  the type parameter
      * @param key  the key
      * @param type the type
+     *
      * @return the t
      */
     public <T> T get(String key, Class<T> type);
@@ -41,6 +43,7 @@ public interface Document {
      * @param <T>  the type parameter
      * @param key  the key
      * @param type the type
+     *
      * @return the t
      */
     public <T> T get(String key, Type type);
@@ -49,6 +52,7 @@ public interface Document {
      * Get object.
      *
      * @param key the key
+     *
      * @return the object
      */
     public Object get(String key);
@@ -57,6 +61,7 @@ public interface Document {
      * Gets string.
      *
      * @param key the key
+     *
      * @return the string
      */
     public String getString(String key);
@@ -65,6 +70,7 @@ public interface Document {
      * Gets int.
      *
      * @param key the key
+     *
      * @return the int
      */
     public int getInt(String key);
@@ -73,6 +79,7 @@ public interface Document {
      * Gets short.
      *
      * @param key the key
+     *
      * @return the short
      */
     public short getShort(String key);
@@ -81,6 +88,7 @@ public interface Document {
      * Gets double.
      *
      * @param key the key
+     *
      * @return the double
      */
     public double getDouble(String key);
@@ -89,6 +97,7 @@ public interface Document {
      * Gets float.
      *
      * @param key the key
+     *
      * @return the float
      */
     public float getFloat(String key);
@@ -97,6 +106,7 @@ public interface Document {
      * Gets long.
      *
      * @param key the key
+     *
      * @return the long
      */
     public long getLong(String key);
@@ -105,6 +115,7 @@ public interface Document {
      * Gets boolean.
      *
      * @param key the key
+     *
      * @return the boolean
      */
     public boolean getBoolean(String key);
@@ -113,6 +124,7 @@ public interface Document {
      * Gets uuid.
      *
      * @param key the key
+     *
      * @return the uuid
      */
     public UUID getUUID(String key);
@@ -128,6 +140,7 @@ public interface Document {
      * Contains key boolean.
      *
      * @param key the key
+     *
      * @return the boolean
      */
     public boolean containsKey(String key);
@@ -159,4 +172,21 @@ public interface Document {
      * @param id the id
      */
     void setId(long id);
+
+    /**
+     * The interface Conditional consumer.
+     *
+     * @param <T> the type parameter
+     */
+    public static interface ConditionalConsumer<T> {
+
+        /**
+         * Expect boolean.
+         *
+         * @param value the value
+         * @return the boolean
+         */
+        public boolean expect(T value);
+    }
+
 }

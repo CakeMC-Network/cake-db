@@ -1,7 +1,7 @@
 package net.cakemc.database;
 
-import net.cakemc.database.api.Collection;
-import net.cakemc.database.api.impl.ZypherCollection;
+import net.cakemc.database.collection.Collection;
+import net.cakemc.database.collection.impl.CakeCollection;
 import net.cakemc.database.file.KeyFile;
 import net.cakemc.database.io.DatabaseCompression;
 import net.cakemc.database.io.DatabaseEncryption;
@@ -18,13 +18,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * The type Zypher database.
- */
-public class ZypherDatabase {
-    /**
-     * The constant RANDOM.
-     */
+public class CakeDatabase {
     public static final Random RANDOM = ThreadLocalRandom.current();
 
     private static final String COLLECTION_SUFFIX = ".db.bin";
@@ -39,15 +33,9 @@ public class ZypherDatabase {
     private final DatabaseWrite databaseWrite;
 
     private final KeyFile keyFile;
-
     private final File baseDirectory;
 
-    /**
-     * Instantiates a new Zypher database.
-     *
-     * @param baseDirectory the base directory
-     */
-    public ZypherDatabase(File baseDirectory) {
+    public CakeDatabase(File baseDirectory) {
         this.baseDirectory = baseDirectory;
 
         if (!baseDirectory.exists())
@@ -63,9 +51,6 @@ public class ZypherDatabase {
         this.databaseWrite = new SaveDatabaseWriter(this);
     }
 
-    /**
-     * Load.
-     */
     public void load() {
         File[] files = baseDirectory.listFiles();
         if (files == null)
@@ -87,9 +72,6 @@ public class ZypherDatabase {
         }
     }
 
-    /**
-     * Save.
-     */
     public void save() {
         long start = System.currentTimeMillis();
         collections.forEach((string, collection) -> {
@@ -102,46 +84,26 @@ public class ZypherDatabase {
         });
     }
 
-    /**
-     * Gets collection.
-     *
-     * @param name the name
-     * @return the collection
-     */
     public Collection getCollection(String name) {
         if (this.collections.containsKey(name))
             return this.collections.get(name);
 
 
-        Collection collection = new ZypherCollection(new ArrayList<>(), RANDOM.nextLong());
+        Collection collection = new CakeCollection(new ArrayList<>(), RANDOM.nextLong());
         this.collections.put(name, collection);
         this.save();
         return collection;
     }
 
-    /**
-     * Gets compression.
-     *
-     * @return the compression
-     */
     public DatabaseCompression getCompression() {
         return compression;
     }
 
-    /**
-     * Gets encryption.
-     *
-     * @return the encryption
-     */
     public DatabaseEncryption getEncryption() {
         return encryption;
     }
 
-    /**
-     * Gets key file.
-     *
-     * @return the key file
-     */
+
     public KeyFile getKeyFile() {
         return keyFile;
     }

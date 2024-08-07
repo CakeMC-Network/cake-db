@@ -1,4 +1,6 @@
-package net.cakemc.database.api;
+package net.cakemc.database.collection;
+
+import net.cakemc.database.collection.Document.ConditionalConsumer;
 
 /**
  * The type Filters.

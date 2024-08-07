@@ -1,37 +1,25 @@
-package net.cakemc.database.api.impl;
+package net.cakemc.database.collection.impl;
 
-import net.cakemc.database.api.Collection;
-import net.cakemc.database.api.Document;
+import net.cakemc.database.collection.Document;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.*;
 
-/**
- * The type Zypher document.
- */
-public class ZypherDocument implements Document {
+public class CakeDocument implements Document {
 
     private final Hashtable<String, Object> values;
     private long documentId;
 
-    /**
-     * Instantiates a new Zypher document.
-     *
-     * @param values the values
-     */
-    public ZypherDocument(Hashtable<String, Object> values) {
+
+    public CakeDocument(Hashtable<String, Object> values) {
         this.values = values;
         this.documentId = this.getLong("_id");
     }
 
-    /**
-     * Instantiates a new Zypher document.
-     */
-    public ZypherDocument() {
+    public CakeDocument() {
         this.documentId = -999;
-
-        values = new Hashtable<>();
+        this.values = new Hashtable<>();
         this.append("_id", documentId);
     }
 

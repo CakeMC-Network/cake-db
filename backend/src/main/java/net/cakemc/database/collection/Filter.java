@@ -1,4 +1,4 @@
-package net.cakemc.database.api;
+package net.cakemc.database.collection;
 
 /**
  * The type Filter.

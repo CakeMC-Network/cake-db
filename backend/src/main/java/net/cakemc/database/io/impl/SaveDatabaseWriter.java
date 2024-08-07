@@ -1,9 +1,9 @@
 package net.cakemc.database.io.impl;
 
-import net.cakemc.database.ZypherDatabase;
-import net.cakemc.database.api.Collection;
-import net.cakemc.database.api.Document;
-import net.cakemc.database.api.impl.ZypherDocument;
+import net.cakemc.database.CakeDatabase;
+import net.cakemc.database.collection.Collection;
+import net.cakemc.database.collection.Document;
+import net.cakemc.database.collection.impl.CakeDocument;
 import net.cakemc.database.io.DatabaseWrite;
 
 import java.io.*;
@@ -18,14 +18,14 @@ public class SaveDatabaseWriter implements DatabaseWrite {
 
     // TODO ADD SYSTEM WITH DYNAMIC DE/SERIALIZER
 
-    private final ZypherDatabase database;
+    private final CakeDatabase database;
 
     /**
      * Instantiates a new Save database writer.
      *
      * @param database the database
      */
-    public SaveDatabaseWriter(ZypherDatabase database) {
+    public SaveDatabaseWriter(CakeDatabase database) {
         this.database = database;
     }
 
@@ -69,17 +69,17 @@ public class SaveDatabaseWriter implements DatabaseWrite {
 
     @Override
     public byte[] serializeDocument(Document document) throws IOException {
-        if (!(document instanceof ZypherDocument zypherDocument))
+        if (!(document instanceof CakeDocument cakeDocument))
             return new byte[0];
 
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         DataOutputStream dataStream = new DataOutputStream(byteStream);
 
-        dataStream.writeLong(zypherDocument.id());
+        dataStream.writeLong(cakeDocument.id());
 
-        dataStream.writeInt(zypherDocument.size());
+        dataStream.writeInt(cakeDocument.size());
 
-        for (Map.Entry<String, Object> entry : zypherDocument.entrySet()) {
+        for (Map.Entry<String, Object> entry : cakeDocument.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
 

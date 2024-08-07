@@ -1,7 +1,7 @@
 package net.cakemc.database.io;
 
-import net.cakemc.database.api.Collection;
-import net.cakemc.database.api.Document;
+import net.cakemc.database.collection.Collection;
+import net.cakemc.database.collection.Document;
 
 import java.io.File;
 import java.io.FileNotFoundException;

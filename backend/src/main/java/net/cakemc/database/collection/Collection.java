@@ -1,7 +1,6 @@
-package net.cakemc.database.api;
+package net.cakemc.database.collection;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * The interface Collection.

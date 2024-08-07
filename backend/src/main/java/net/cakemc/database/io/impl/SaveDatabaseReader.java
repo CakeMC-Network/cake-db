@@ -1,10 +1,10 @@
 package net.cakemc.database.io.impl;
 
-import net.cakemc.database.ZypherDatabase;
-import net.cakemc.database.api.Collection;
-import net.cakemc.database.api.Document;
-import net.cakemc.database.api.impl.ZypherCollection;
-import net.cakemc.database.api.impl.ZypherDocument;
+import net.cakemc.database.CakeDatabase;
+import net.cakemc.database.collection.Collection;
+import net.cakemc.database.collection.Document;
+import net.cakemc.database.collection.impl.CakeCollection;
+import net.cakemc.database.collection.impl.CakeDocument;
 import net.cakemc.database.io.DatabaseRead;
 
 import java.io.*;
@@ -19,14 +19,14 @@ import java.util.zip.DataFormatException;
  */
 public class SaveDatabaseReader implements DatabaseRead {
 
-    private final ZypherDatabase database;
+    private final CakeDatabase database;
 
     /**
      * Instantiates a new Save database reader.
      *
      * @param database the database
      */
-    public SaveDatabaseReader(ZypherDatabase database) {
+    public SaveDatabaseReader(CakeDatabase database) {
         this.database = database;
     }
 
@@ -73,7 +73,7 @@ public class SaveDatabaseReader implements DatabaseRead {
             documents.add(doc);
         }
 
-        return new ZypherCollection(documents, id);
+        return new CakeCollection(documents, id);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class SaveDatabaseReader implements DatabaseRead {
             values.put(key, value);
         }
 
-        return new ZypherDocument(values);
+        return new CakeDocument(values);
     }
 
 }
